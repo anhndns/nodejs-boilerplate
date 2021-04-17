@@ -25,4 +25,11 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        '@katana': ['src'],
+      },
+    },
+  },
 };
