@@ -1,15 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+require('./logger');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
 
-var app = express();
+const app = express();
+const loggerstream = {
+  write(message) {
+    logger.info(message);
+  },
+};
 
-app.use(logger('dev'));
+app.use(morgan('combined', { stream: loggerstream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
